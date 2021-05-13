@@ -1,5 +1,6 @@
 ﻿using Catalog.API.Entities;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,12 +10,21 @@ namespace Catalog.API.Data
     {
         public static void SeedData(IMongoCollection<Product> productCollection)
         {
-            bool existProduct = productCollection.Find(p => true).Any();
-            if (!existProduct)
+            try
             {
-                productCollection.InsertManyAsync(GetMyProducts());
+                bool existProduct = productCollection.Find(p => true).Any();
+                if (!existProduct)
+                {
+                    productCollection.InsertManyAsync(GetMyProducts());
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException != null && e.InnerException is TimeoutException)
+                    Console.WriteLine($"Erro: Não foi possível conectar ao servidor.");
             }
         }
+
         private static IEnumerable<Product> GetMyProducts()
         {
             return new List<Product>()

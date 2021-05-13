@@ -1,6 +1,8 @@
 ﻿using Catalog.API.Entities;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 
 namespace Catalog.API.Data
 {
