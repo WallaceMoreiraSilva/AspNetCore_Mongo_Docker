@@ -21,7 +21,7 @@ namespace Catalog.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICatalogContext, CatalogContext>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();          
 
             services.AddControllers();
 
