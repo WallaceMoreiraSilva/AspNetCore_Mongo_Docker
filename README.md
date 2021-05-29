@@ -1,11 +1,18 @@
-# AspNetCore_Mongo_Docker
+# Tecnologia usada
 AspNetCore + Mongo + Docker
 
 -- Instalar o Docket Desktop => https://www.docker.com/products/docker-desktop
 
-#Explicação 
+# Conceitos fundamentais de docker
 
-Clique no Projeto com o Botao direito e aperte Add:
+--Imagens => Base para criação de containers, são geradas a partir do arquivo dockerfile. Contém todos os
+arquivos e dependencias de uma aplicação, incluindo sistema operacional
+
+--Containers => instância de uma aplicação (serviço, site, API) criada a partir de uma imagem
+
+#Explicação para entendimento do docker
+
+Se clicar no Projeto com o botão direito e apertar add. Você verá as duas opções abaixo:
 
 	Container Orchestrator Suport...  => se eu quiser criar o docker compose
  
@@ -16,8 +23,8 @@ determinada imagem.
 
 -- A API será executada dentro do conteiner
 
-obs: CatalogoAPI é o conteiner
 obs: catalog-mongo é a imagem
+obs: CatalogoAPI é o conteiner
 
 --Vamos executar a API em um conteiner e a API vai acessar o mongoDB em outro conteiner. Portanto, vamos usar 
 a orquestracao dos conteiners usando docker compose.
@@ -30,6 +37,16 @@ obs: O docker-compose simplifica o processo de configuração e execucao de apli
 digitar comandos complexos, o que pode levar a erros de configuração.
 
 
+#Explicando o arquivo dockerfile
 
+
+
+#Explicando o arquivo docker-compose
+
+services => indica os servicos que serão criados. Aqui definimos os conteineres usados e suas configurações
+
+volumes => Define os recursos usados pelos serviços, eu acho que é onde vai ser criado um backup tb
+
+networks => Define os recursos usados pelos serviços
 
 
