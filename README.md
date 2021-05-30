@@ -39,6 +39,25 @@ digitar comandos complexos, o que pode levar a erros de configuração.
 
 #Explicando o arquivo dockerfile
 
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base    => Cria uma camada a partir da imagem asp .net 5.0
+WORKDIR /app     => Define o diretorio de trabalho de um conteiner do Docker
+EXPOSE 80        => Expoe a porta na qual o conteiner esta escutando
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["Catalog.API/Catalog.API.csproj", "Catalog.API/"]  
+RUN dotnet restore "Catalog.API/Catalog.API.csproj"
+COPY . .  => Copia arquivos entreo cliente(local) e o conteiner
+WORKDIR "/src/Catalog.API"
+RUN dotnet build "Catalog.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Catalog.API.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Catalog.API.dll"]    => Executa um comando quando o Conteiner for inciado
 
 
 #Explicando o arquivo docker-compose
