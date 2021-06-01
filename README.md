@@ -10,6 +10,8 @@ arquivos e dependencias de uma aplicação, incluindo sistema operacional
 
 --Containers => instância de uma aplicação (serviço, site, API) criada a partir de uma imagem
 
+obs: https://hub.docker.com/ => onde você pode ver as imagens disponiveis
+
 #Explicação para entendimento do docker
 
 Se clicar no Projeto com o botão direito e apertar add. Você verá as duas opções abaixo:
@@ -36,7 +38,6 @@ os serviços das aplicações
 obs: O docker-compose simplifica o processo de configuração e execucao de aplicativos para que nao tenhamos que 
 digitar comandos complexos, o que pode levar a erros de configuração.
 
-
 #Explicando o arquivo dockerfile
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base    => Cria uma camada a partir da imagem asp .net 5.0
@@ -58,7 +59,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Catalog.API.dll"]    => Executa um comando quando o Conteiner for inciado
-
 
 #Explicando o arquivo docker-compose
 
